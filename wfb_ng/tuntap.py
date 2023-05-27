@@ -53,8 +53,7 @@ class TUNTAPTransport(abstract.FileDescriptor):
                 ifidx = ip.link_lookup(ifname=name)[0]
                 _addr, _mask = addr.split('/')
                 ip.link('set', index=ifidx, state='up', mtu=self.mtu)
-                ip.addr('add', index=ifidx, address=_addr, prefixlen=int(_mask))    
-                ip.route("add", dst="default", gateway=_addr, oif=ifidx, metric=800)
+                ip.addr('add', index=ifidx, address=_addr, prefixlen=int(_mask))
         except Exception:
             os.close(self.fd)
             raise
